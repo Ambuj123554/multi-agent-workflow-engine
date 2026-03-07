@@ -1,15 +1,19 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+from database import get_all_sessions, get_messages
 
 router = APIRouter(prefix="/api/chat", tags=["Chat Sessions"])
 
-# Dummy chats for now
-dummy_sessions = [
-    {"id": 1, "title": "Product Launch Strategy", "timestamp": "2h ago"},
-    {"id": 2, "title": "Market Analysis Report", "timestamp": "5h ago"},
-    {"id": 3, "title": "Customer Research Insights", "timestamp": "1d ago"},
-    {"id": 4, "title": "Competitor Analysis", "timestamp": "2d ago"},
-]
 
 @router.get("/sessions")
 async def get_sessions():
-    return {"sessions": dummy_sessions}
+    sessions = get_all_sessions()
+    return {"sessions": sessions}
+
+
+@router.get("/sessions/{session_id}/messages")
+async def get_session_messages(session_id: int):
+    messages = get_messages(session_id)
+    if not messages:
+        raise HTTPException(status_code=404, detail="Session not found or empty")
+    return {"messages": messages}
+

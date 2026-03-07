@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Search, Brain, CheckCircle2, Pencil, Loader2 } from 'lucide-react';
+import { Search, Brain, CheckCircle2, Pencil, Loader2, Lightbulb } from 'lucide-react';
 
 interface AgentStepperProps {
   currentStep: number;
@@ -7,10 +7,11 @@ interface AgentStepperProps {
 
 export default function AgentStepper({ currentStep }: AgentStepperProps) {
   const agents = [
-    { name: 'Research', icon: Search, color: 'from-blue-500 to-cyan-500' },
-    { name: 'Analysis', icon: Brain, color: 'from-cyan-500 to-teal-500' },
-    { name: 'Validation', icon: CheckCircle2, color: 'from-teal-500 to-emerald-500' },
-    { name: 'Writer', icon: Pencil, color: 'from-emerald-500 to-green-500' },
+    { name: 'Understanding', icon: Lightbulb, color: 'from-violet-500 to-purple-500' },
+    { name: 'Research',      icon: Search,    color: 'from-blue-500 to-cyan-500' },
+    { name: 'Analysis',      icon: Brain,     color: 'from-cyan-500 to-teal-500' },
+    { name: 'Validation',    icon: CheckCircle2, color: 'from-teal-500 to-emerald-500' },
+    { name: 'Writer',        icon: Pencil,    color: 'from-emerald-500 to-green-500' },
   ];
 
   return (

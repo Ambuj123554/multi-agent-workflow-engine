@@ -1,6 +1,7 @@
 # agents/analysis_agent.py
 
 from agents.base_agent import BaseAgent
+from llm import llm
 
 class AnalysisAgent(BaseAgent):
     """Agent responsible for analyzing research notes."""
@@ -11,13 +12,16 @@ class AnalysisAgent(BaseAgent):
     def run(self, research_notes: str) -> str:
         self.log("Analyzing research notes...")
 
-        analysis = (
-            "Analysis Summary:\n"
-            f"- Extracted key factors from research\n"
-            f"- Identified main patterns\n"
-            f"- Highlighted important areas\n\n"
-            f"Detailed Analysis Based on Research:\n{research_notes}"
+        prompt = (
+            f"You are an expert analyst.\n"
+            f"Analyze the following research and extract:\n"
+            f"- Key insights and patterns\n"
+            f"- Important findings\n"
+            f"- Strengths and weaknesses\n\n"
+            f"Research:\n{research_notes}"
         )
 
+        analysis = llm.invoke(prompt)
         self.log("Analysis complete.")
         return analysis
+
