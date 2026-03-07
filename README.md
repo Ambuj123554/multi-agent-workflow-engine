@@ -60,18 +60,34 @@
    ---
 
    ## 📁 Project Structure
-
-
-  AI_AGENT/ ├── backend/ │ ├── agents/ │ │ ├── understanding_agent.py # Stage 1: Query decomposition │ │ ├── research_agent.py # Stage 2: Information
-  gathering │ │ ├── analysis_agent.py # Stage 3: Synthesis │ │ ├── validation_agent.py # Stage 4: Scoring + retry loop │ │ └── writer_agent.py # Stage 5:
-  Final output │ ├── routers/ │ │ ├── chat.py # /api/run endpoint │ │ ├── compare.py # /api/compare endpoint │ │ ├── chat_sessions.py # Session CRUD │ │
-  └── chat_history.py # Message history │ ├── pipeline.py # Pipeline orchestration + tracing │ ├── llm.py # Pluggable LLM (Groq/Gemini/Ollama) │ ├──
-  memory.py # SQLite cache + MemoryStore │ ├── database.py # SQLite session/message helpers │ └── main.py # FastAPI app entry point └── frontend/project/
-  └── src/  ├── App.tsx # Root: state, routing, compare mode  └── components/  ├── ChatMessage.tsx # Message + confidence badge + trace  ├── ChatInput.tsx
-  # Input + voice recording  ├── Sidebar.tsx # Session history  ├── AgentTrace.tsx # Expandable reasoning panel  └── CompareView.tsx # Side-by-side LLM
-  comparison
-
-
+   
+AI_AGENT/
+├── backend/
+│   ├── agents/
+│   │   ├── understanding_agent.py   # Stage 1 — Query Decomposition
+│   │   ├── research_agent.py        # Stage 2 — Information Gathering
+│   │   ├── analysis_agent.py        # Stage 3 — Synthesis
+│   │   ├── validation_agent.py      # Stage 4 — Scoring + Retry Loop
+│   │   └── writer_agent.py          # Stage 5 — Final Output
+│   ├── routers/
+│   │   ├── chat.py                  # /api/run endpoint
+│   │   ├── compare.py               # /api/compare endpoint
+│   │   ├── chat_sessions.py         # Session CRUD
+│   │   └── chat_history.py          # Message History
+│   ├── pipeline.py                  # Pipeline Orchestration + Tracing
+│   ├── llm.py                       # Pluggable LLM (Groq / Gemini / Ollama)
+│   ├── memory.py                    # SQLite Cache + MemoryStore
+│   ├── database.py                  # SQLite Session / Message Helpers
+│   └── main.py                      # FastAPI App Entry Point
+└── frontend/project/
+    └── src/
+        ├── App.tsx                  # Root: State, Routing, Compare Mode
+        └── components/
+            ├── ChatMessage.tsx      # Message + Confidence Badge + Trace
+            ├── ChatInput.tsx        # Input + Voice Recording
+            ├── Sidebar.tsx          # Session History
+            ├── AgentTrace.tsx       # Expandable Reasoning Panel
+            └── CompareView.tsx      # Side-by-side LLM Comparison
    ---
 
    ## ⚙️ Setup & Run
@@ -106,19 +122,6 @@
   Create frontend/project/.env:
 
    VITE_API_URL=https://your-ngrok-url.ngrok-free.app
-
-  -------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  📊 Resume Highlights
-
-   - Architected a 5-stage multi-agent AI pipeline (Understanding → Research → Analysis → Validation → Output) with dynamic query decomposition and
-  automatic validation retry loops — reducing hallucination rate by 25–30% vs single-agent baseline
-   - Built a pluggable LLM abstraction layer supporting Groq (LLaMA
-    3.3 70B), Gemini, and Ollama with real-time parallel LLM comparison mode using asyncio.gather
-   - Integrated SQLite-backed semantic caching reducing redundant LLM API calls by ~40% in repeat/similar query workflows
-   - Developed full AI transparency system with per-agent execution traces (prompt, response, latency ms, retry status), confidence scoring, and
-  collapsible reasoning panel in React UI
-   - Engineered production-ready FastAPI backend with persistent chat sessions, voice input via Web Speech API, dark/light theming, and REST API design
 
   -------------------------------------------------------------------------------------------------------------------------------------------------------
 
